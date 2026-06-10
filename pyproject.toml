@@ -1,0 +1,123 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "holdout"
+dynamic = ["version"]
+description = "Quant-grade LLM evaluation: confidence intervals, significance tests, and regression gates — not vanity numbers."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "MIT"
+authors = [{ name = "roshworldwide" }]
+keywords = ["llm", "evaluation", "testing", "statistics", "regression", "ci", "pytest"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Framework :: Pytest",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Software Development :: Quality Assurance",
+    "Topic :: Software Development :: Testing",
+    "Typing :: Typed",
+]
+dependencies = [
+    "numpy>=1.26",
+    "httpx>=0.27",
+    "rich>=13.7",
+]
+
+[project.optional-dependencies]
+openai = ["openai>=1.40"]
+anthropic = ["anthropic>=0.34"]
+mlx = ["mlx-lm>=0.19; platform_machine == 'arm64' and sys_platform == 'darwin'"]
+all = ["holdout[openai,anthropic,mlx]"]
+
+[project.urls]
+Homepage = "https://github.com/roshworldwide/project1"
+Repository = "https://github.com/roshworldwide/project1"
+Issues = "https://github.com/roshworldwide/project1/issues"
+
+[dependency-groups]
+dev = [
+    "ruff>=0.8",
+    "mypy>=1.13",
+    "pytest>=8.3",
+    "pytest-cov>=6.0",
+    "pytest-asyncio>=0.24",
+    "hypothesis>=6.115",
+    "scipy>=1.14",          # dev-only: cross-validate our stats against reference implementations
+    "scipy-stubs>=1.14",
+    "pre-commit>=4.0",
+]
+
+[tool.hatch.version]
+path = "src/holdout/__init__.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/holdout"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+src = ["src", "tests"]
+
+[tool.ruff.lint]
+select = [
+    "E", "F", "W",    # pycodestyle / pyflakes
+    "I",              # isort
+    "N",              # pep8-naming
+    "UP",             # pyupgrade
+    "B",              # bugbear
+    "A",              # builtins shadowing
+    "C4",             # comprehensions
+    "SIM",            # simplify
+    "ARG",            # unused arguments
+    "PTH",            # pathlib
+    "RUF",            # ruff-specific
+    "D",              # docstrings — every public function documents itself
+]
+ignore = [
+    "D105",           # magic-method docstrings
+    "D107",           # __init__ docstrings (documented at class level)
+]
+
+[tool.ruff.lint.pydocstyle]
+convention = "numpy"
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["D", "ARG", "E501"]
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_unreachable = true
+show_error_codes = true
+files = ["src", "tests"]
+
+[[tool.mypy.overrides]]
+module = ["mlx_lm.*"]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q --strict-markers"
+asyncio_mode = "auto"
+markers = [
+    "live: tests that call real model providers (deselected by default in CI)",
+]
+
+[tool.coverage.run]
+source = ["holdout"]
+branch = true
+
+[tool.coverage.report]
+exclude_also = [
+    "if TYPE_CHECKING:",
+    "raise NotImplementedError",
+    "@overload",
+]
+precision = 1

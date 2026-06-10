@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+.venv/
+.mypy_cache/
+.ruff_cache/
+.pytest_cache/
+.coverage
+coverage.xml
+htmlcov/
+.hypothesis/
+
+# holdout run store (local artifacts, never committed)
+.holdout/
+
+# Node (dashboard dev)
+node_modules/
+dashboard/dist/
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
