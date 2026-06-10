@@ -98,8 +98,10 @@ warn_unreachable = true
 show_error_codes = true
 files = ["src", "tests"]
 
+# Optional-extra SDKs: not installed in the default dev environment, imported
+# lazily at runtime. When they are absent mypy treats them as Any.
 [[tool.mypy.overrides]]
-module = ["mlx_lm.*"]
+module = ["mlx_lm.*", "openai", "openai.*", "anthropic", "anthropic.*"]
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]
