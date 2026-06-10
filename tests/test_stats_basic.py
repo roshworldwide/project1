@@ -167,7 +167,11 @@ def test_metadata_fields_are_recorded() -> None:
     est = bootstrap_ci([1.0, 2.0, 3.0, 4.0], level=0.9, n_resamples=500, seed=0)
     assert est.n == 4
     assert est.level == 0.9
-    assert est.method == "bootstrap-percentile"
+    assert est.method == "bootstrap-bca"  # BCa is the default since M2
+    pct = bootstrap_ci(
+        [1.0, 2.0, 3.0, 4.0], level=0.9, n_resamples=500, seed=0, method="percentile"
+    )
+    assert pct.method == "bootstrap-percentile"
 
 
 @settings(max_examples=60, deadline=None)
