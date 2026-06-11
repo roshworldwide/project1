@@ -36,6 +36,9 @@ anthropic = ["anthropic>=0.34"]
 mlx = ["mlx-lm>=0.19; platform_machine == 'arm64' and sys_platform == 'darwin'"]
 all = ["holdout[openai,anthropic,mlx]"]
 
+[project.scripts]
+holdout = "holdout.cli.main:app"
+
 [project.entry-points.pytest11]
 holdout = "holdout.pytest_plugin"
 
