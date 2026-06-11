@@ -1,0 +1,74 @@
+site_name: holdout
+site_description: >-
+  Quant-grade LLM evaluation: confidence intervals, significance tests, and
+  regression gates — not vanity numbers.
+repo_url: https://github.com/roshworldwide/project1
+repo_name: roshworldwide/project1
+
+validation:
+  anchors: warn
+
+theme:
+  name: material
+  palette:
+    # Dark is the default.
+    - scheme: slate
+      primary: black
+      accent: amber
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+    - scheme: default
+      primary: black
+      accent: amber
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+  features:
+    - navigation.sections
+    - navigation.top
+    - content.code.copy
+
+plugins:
+  - search
+  - mkdocstrings:
+      handlers:
+        python:
+          paths: [src]
+          options:
+            show_source: false
+            members_order: source
+            docstring_style: numpy
+            docstring_options:
+              # Provider docstrings close their Parameters section with the
+              # prose line "Other parameters are inherited from ModelProvider";
+              # don't treat it as an undeclared parameter.
+              warn_unknown_params: false
+              warn_missing_types: false
+            show_root_heading: true
+            show_symbol_type_heading: true
+            separate_signature: true
+            show_signature_annotations: true
+            merge_init_into_class: true
+
+markdown_extensions:
+  - admonition
+  - tables
+  - footnotes
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.details
+
+nav:
+  - Home: index.md
+  - Guide:
+      - Quickstart: guide/quickstart.md
+      - The regression gate: guide/regression-gate.md
+      - How the statistics work: guide/statistics.md
+      - Leakage and holdout discipline: guide/leakage.md
+      - Providers and targets: guide/providers.md
+      - Pytest plugin: guide/pytest.md
+      - CLI reference: guide/cli.md
+  - Reference:
+      - API reference: api.md
+      - Design: design.md

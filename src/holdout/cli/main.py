@@ -166,8 +166,12 @@ def _cmd_compare(args: argparse.Namespace, console: Console) -> int:
         if args.markdown:
             print(f"\n> {report}")
         else:
+            from rich.markup import escape
+
+            # escape(): the report text contains "[ok]"-style level tags
+            # that Rich would otherwise swallow as markup.
             style = {"ok": "dim", "caution": "yellow", "overfit-risk": "bold red"}[report.level]
-            console.print(f"[{style}]{report}[/]")
+            console.print(f"[{style}]{escape(str(report))}[/]")
 
     if cmp.verdict == "regressed":
         return 1

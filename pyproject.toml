@@ -48,6 +48,10 @@ Repository = "https://github.com/roshworldwide/project1"
 Issues = "https://github.com/roshworldwide/project1/issues"
 
 [dependency-groups]
+docs = [
+    "mkdocs-material>=9.5",
+    "mkdocstrings[python]>=0.27",
+]
 dev = [
     "ruff>=0.8",
     "mypy>=1.13",
@@ -96,6 +100,9 @@ convention = "numpy"
 
 [tool.ruff.lint.per-file-ignores]
 "tests/**" = ["D", "ARG", "E501"]
+# Examples and benchmarks are narrative scripts; comments carry the story.
+"examples/**" = ["D101", "D102", "D103"]
+"benchmarks/**" = ["D101", "D102", "D103"]
 
 [tool.mypy]
 python_version = "3.11"
@@ -107,7 +114,7 @@ files = ["src", "tests"]
 # Optional-extra SDKs: not installed in the default dev environment, imported
 # lazily at runtime. When they are absent mypy treats them as Any.
 [[tool.mypy.overrides]]
-module = ["mlx_lm.*", "openai", "openai.*", "anthropic", "anthropic.*"]
+module = ["mlx", "mlx.*", "mlx_lm", "mlx_lm.*", "openai", "openai.*", "anthropic", "anthropic.*"]
 ignore_missing_imports = true
 
 [tool.pytest.ini_options]

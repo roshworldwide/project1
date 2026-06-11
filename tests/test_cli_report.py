@@ -72,6 +72,7 @@ def test_compare_exit_codes_and_ledger(project: Path, capsys: pytest.CaptureFixt
     assert "REGRESSED" in out
     assert "mcnemar" in out
     assert "has been used 1 time(s)" in out
+    assert "[ok]" in out  # the ledger level tag survives Rich markup parsing
 
     # Identical runs: exit 0; --no-ledger leaves the count unchanged.
     code = main(["compare", good[:12], good[:12], "--no-ledger"])

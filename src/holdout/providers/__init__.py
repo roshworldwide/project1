@@ -12,11 +12,13 @@ if TYPE_CHECKING:
     from holdout.providers.anthropic import Anthropic
     from holdout.providers.base import ModelProvider
     from holdout.providers.embeddings import OllamaEmbeddings, OpenAIEmbeddings
+    from holdout.providers.mlx import MLX
     from holdout.providers.ollama import Ollama
     from holdout.providers.openai import OpenAI
     from holdout.providers.static import StaticTarget
 
 __all__ = [
+    "MLX",
     "Anthropic",
     "ModelProvider",
     "Ollama",
@@ -28,6 +30,7 @@ __all__ = [
 
 _REGISTRY = {
     "Anthropic": "holdout.providers.anthropic",
+    "MLX": "holdout.providers.mlx",
     "ModelProvider": "holdout.providers.base",
     "Ollama": "holdout.providers.ollama",
     "OllamaEmbeddings": "holdout.providers.embeddings",
