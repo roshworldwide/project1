@@ -7,9 +7,12 @@ repos:
       - id: check-yaml
       - id: check-toml
       - id: check-added-large-files
+        # retina dashboard screenshots are ~1MB each, intentionally committed
+        args: [--maxkb=1200]
 
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.8.4
+    # keep in lockstep with the ruff version in .venv (rule drift otherwise)
+    rev: v0.15.16
     hooks:
       - id: ruff
         args: [--fix]

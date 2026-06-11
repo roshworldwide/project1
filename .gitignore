@@ -22,8 +22,10 @@ examples/ci/store/ledger.sqlite3
 # Node (dashboard dev)
 node_modules/
 dashboard/dist/
+*.tsbuildinfo
 
 # OS / editor
 .DS_Store
 .idea/
 .vscode/
+.holdout-demo/

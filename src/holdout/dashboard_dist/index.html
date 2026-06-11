@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:," />
+    <title>holdout</title>
+    <script>
+      // Resolve the theme before first paint to avoid a flash.
+      (function () {
+        var pref = "auto";
+        try {
+          pref = localStorage.getItem("holdout-theme") || "auto";
+        } catch (e) {}
+        var dark =
+          pref === "dark" ||
+          (pref !== "light" &&
+            window.matchMedia("(prefers-color-scheme: dark)").matches);
+        document.documentElement.dataset.theme = dark ? "dark" : "light";
+      })();
+    </script>
+    <script type="module" crossorigin src="/assets/index-s8VjAJdJ.js"></script>
+    <link rel="stylesheet" crossorigin href="/assets/index-BMMFqK_E.css">
+  </head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>

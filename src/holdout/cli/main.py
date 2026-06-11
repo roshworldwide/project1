@@ -105,6 +105,12 @@ def _build_parser() -> argparse.ArgumentParser:
     p_chk.add_argument("--ngram", type=int, default=5)
     p_chk.add_argument("--threshold", type=float, default=0.5)
     p_chk.add_argument("--dup-threshold", type=float, default=0.8)
+
+    p_dash = sub.add_parser(
+        "dashboard", help="serve the local read-only dashboard over the run store"
+    )
+    p_dash.add_argument("--port", type=int, default=4321)
+    p_dash.add_argument("--no-open", action="store_true", help="do not open the browser")
     return parser
 
 
@@ -266,6 +272,15 @@ def _cmd_check(args: argparse.Namespace, console: Console) -> int:
     return 1 if dirty else 0
 
 
+def _cmd_dashboard(args: argparse.Namespace, console: Console) -> int:
+    from holdout.dashboard.server import serve
+    from holdout.store.run_store import RunStore
+
+    del console  # serve() prints its own one-line banner
+    serve(RunStore(args.store), port=args.port, open_browser=not args.no_open)
+    return 0
+
+
 _COMMANDS = {
     "run": _cmd_run,
     "compare": _cmd_compare,
@@ -273,6 +288,7 @@ _COMMANDS = {
     "report": _cmd_report,
     "power": _cmd_power,
     "check": _cmd_check,
+    "dashboard": _cmd_dashboard,
 }
 
 

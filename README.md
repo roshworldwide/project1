@@ -2,6 +2,10 @@
 
 **The LLM eval framework that reports a confidence interval, not a vanity number.**
 
+![holdout dashboard — confidence intervals as error bars, local-first](docs/assets/dashboard-dark.png)
+
+*One command — `holdout dashboard` — serves this over your local run store. Read-only, fully offline, 0 bytes leave the machine.*
+
 You changed a prompt. Your eval score moved from 0.967 to 0.933. Do you ship?
 
 Every threshold-based eval tool answers that question wrong in both directions: it
@@ -119,6 +123,10 @@ python examples/05_mlx_airgapped.py       # in-process on Apple silicon
   underpowered eval is not evidence of safety, and this tool says so.
 - **HTML report** — one self-contained dark file, every metric drawn with its CI as
   an error bar. Opens on an air-gapped machine.
+- **Local dashboard** — `holdout dashboard` serves a read-only web UI over the run
+  store: runs timeline, trend charts with CI bands, statistical comparisons with
+  paired error bars, and holdout-discipline status. The SPA ships inside the wheel;
+  no Node, no cloud, no accounts.
 - **Performance** — the framework adds ~6 µs per case; a 1,000-case eval runs at
   1.08× the theoretical I/O floor ([measured](benchmarks/RESULTS.md), rerun it
   yourself).
