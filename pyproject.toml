@@ -36,6 +36,9 @@ anthropic = ["anthropic>=0.34"]
 mlx = ["mlx-lm>=0.19; platform_machine == 'arm64' and sys_platform == 'darwin'"]
 all = ["holdout[openai,anthropic,mlx]"]
 
+[project.entry-points.pytest11]
+holdout = "holdout.pytest_plugin"
+
 [project.urls]
 Homepage = "https://github.com/roshworldwide/project1"
 Repository = "https://github.com/roshworldwide/project1"
@@ -108,6 +111,7 @@ ignore_missing_imports = true
 testpaths = ["tests"]
 addopts = "-q --strict-markers"
 asyncio_mode = "auto"
+asyncio_default_fixture_loop_scope = "function"
 markers = [
     "live: tests that call real model providers (deselected by default in CI)",
 ]
