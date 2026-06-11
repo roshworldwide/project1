@@ -12,9 +12,12 @@ The assertions live in :mod:`holdout.testing` and work with or without
 this plugin.
 """
 
+from typing import TYPE_CHECKING
+
 import pytest
 
-from holdout.store.run_store import RunStore
+if TYPE_CHECKING:
+    from holdout.store.run_store import RunStore
 
 
 def pytest_addoption(parser: pytest.Parser) -> None:
@@ -42,8 +45,13 @@ def pytest_configure(config: pytest.Config) -> None:
 
 
 @pytest.fixture(scope="session")
-def holdout_store(request: pytest.FixtureRequest) -> RunStore:
+def holdout_store(request: pytest.FixtureRequest) -> "RunStore":
     """Return the run store configured by ``--holdout-store``."""
+    # Imported lazily: the plugin loads at every pytest startup for every
+    # user with holdout installed, and must stay import-light (numpy etc.
+    # load only when a holdout fixture is actually used).
+    from holdout.store.run_store import RunStore
+
     return RunStore(str(request.config.getoption("--holdout-store")))
 
 

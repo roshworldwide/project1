@@ -11,7 +11,7 @@ tested, certifying "no regression" would be dishonest.
 
 import functools
 import inspect
-from collections.abc import Callable
+from collections.abc import Callable, Sequence
 from typing import TYPE_CHECKING, Any, ParamSpec, TypeVar, cast
 
 from holdout.core.evalset import Eval
@@ -176,6 +176,59 @@ def assert_adequately_powered(
             + "\n  ".join(underpowered)
         )
     return analyses
+
+
+def assert_no_leakage(
+    ev: Eval,
+    corpus: "str | Sequence[str] | Target",
+    *,
+    ngram_size: int = 5,
+    threshold: float = 0.5,
+    duplicate_threshold: float | None = 0.8,
+) -> None:
+    """Assert the eval is not contaminated by the prompt and has no near-dupes.
+
+    Checks every case input/reference against ``corpus`` (a string, a list
+    of strings, or a Target — a provider's system prompt is extracted
+    automatically) using exact-substring and n-gram containment. With
+    ``duplicate_threshold`` set (default 0.8), also fails on near-duplicate
+    case pairs inside the eval, which silently inflate the effective sample
+    size. Pass ``duplicate_threshold=None`` to skip that check.
+
+    Raises
+    ------
+    AssertionError
+        With the full contamination/duplicate report in the message.
+    """
+    from holdout.leakage.contamination import check_contamination
+    from holdout.leakage.duplicates import find_near_duplicates
+
+    texts: str | Sequence[str]
+    if isinstance(corpus, str | Sequence):
+        texts = corpus
+    else:  # a Target: audit its system prompt if it exposes one
+        system = getattr(corpus, "system", None)
+        if not isinstance(system, str) or not system:
+            raise ValueError(
+                f"target {corpus.name!r} exposes no system prompt to audit; pass the "
+                "prompt/few-shot text explicitly"
+            )
+        texts = system
+
+    problems: list[str] = []
+    report = check_contamination(ev, texts, ngram_size=ngram_size, threshold=threshold)
+    if not report.clean:
+        problems.append(report.summary())
+    if duplicate_threshold is not None:
+        dupes = find_near_duplicates(ev, threshold=duplicate_threshold)
+        if dupes:
+            listing = "\n".join(f"  {d}" for d in dupes)
+            problems.append(
+                f"near-duplicate cases inflate the effective sample size "
+                f"(n={len(ev.cases)} is overstated):\n{listing}"
+            )
+    if problems:
+        raise AssertionError("eval leakage detected:\n" + "\n".join(problems))
 
 
 def llm_eval(
