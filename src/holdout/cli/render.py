@@ -90,6 +90,42 @@ def print_comparison(console: Console, cmp: RunComparison) -> None:
         console.print(f"[yellow]warning:[/yellow] {w}")
 
 
+def comparison_markdown(cmp: RunComparison) -> str:
+    """Render a comparison as GitHub-flavored markdown (for PR comments)."""
+    head = f"### holdout · `{cmp.eval_name}` — **{_VERDICT_TEXT[cmp.verdict]}**"
+    meta = (
+        f"baseline `{cmp.baseline_run_id[:12]}` ({cmp.baseline_target}) vs "
+        f"candidate `{cmp.candidate_run_id[:12]}` ({cmp.candidate_target}) · "
+        f"alpha={cmp.alpha:g} · correction={cmp.correction}"
+    )
+    lines = [
+        head,
+        "",
+        meta,
+        "",
+        "| metric | verdict | effect | CI | test | p (adj) | n |",
+        "|---|---|---:|---:|---|---:|---:|",
+    ]
+    for c in cmp.comparisons:
+        if c.result is None:
+            lines.append(
+                f"| `{c.metric}` | {_VERDICT_TEXT[c.verdict]} | — | — | "
+                f"{c.note or '—'} | — | {c.n_pairs} |"
+            )
+            continue
+        r = c.result
+        p = c.p_adjusted if c.p_adjusted is not None else r.p_value
+        lines.append(
+            f"| `{c.metric}` | {_VERDICT_TEXT[c.verdict]} | {r.effect:+.3f} | "
+            f"[{r.ci.ci_low:+.3f}, {r.ci.ci_high:+.3f}] | {r.test} | {p:.4g} | {c.n_pairs} |"
+        )
+    for w in cmp.warnings:
+        lines.append(f"> ⚠ {w}")
+    lines.append("")
+    lines.append("_every metric carries its uncertainty — holdout_")
+    return "\n".join(lines)
+
+
 def print_run_list(console: Console, infos: list[StoredRunInfo]) -> None:
     """Print the stored-runs listing."""
     table = Table(title="stored runs", title_justify="left")

@@ -1,0 +1,33 @@
+# Dogfood: this repo gates itself with its own action. The eval runs a
+# deterministic offline target (no model calls, no keys) against a committed
+# baseline artifact; the gate fails only on statistically significant
+# regression and posts the comparison table on PRs.
+name: evals
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+env:
+  PYTHONPATH: examples/ci
+
+jobs:
+  eval-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: holdout eval gate
+        uses: ./
+        with:
+          eval: examples/ci/cases.jsonl
+          target: "targets:candidate"
+          baseline: dace0098e767
+          store: examples/ci/store
+          seed: "42"
+          install: "."

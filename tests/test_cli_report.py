@@ -139,6 +139,41 @@ def test_unknown_run_ref_is_a_clean_error(
     assert "error:" in capsys.readouterr().err
 
 
+def test_run_id_file_for_ci_scripting(project: Path) -> None:
+    code = main(
+        [
+            "run",
+            "cases.jsonl",
+            "--target",
+            "cli_targets_mod:good",
+            "--seed",
+            "7",
+            "--id-file",
+            "rid.txt",
+        ]
+    )
+    assert code == 0
+    rid = (project / "rid.txt").read_text(encoding="utf-8")
+    assert len(rid) == 64
+    assert RunStore(project / ".holdout").load(rid).run_id == rid
+
+
+def test_compare_markdown_for_pr_comments(
+    project: Path, capsys: pytest.CaptureFixture[str]
+) -> None:
+    good, bad = _run_both(project)
+    capsys.readouterr()
+    code = main(["compare", good[:12], bad[:12], "--markdown"])
+    out = capsys.readouterr().out
+    assert code == 1
+    assert "### holdout" in out
+    assert "**REGRESSED**" in out
+    assert "| metric | verdict | effect | CI | test | p (adj) | n |" in out
+    assert "| `exact_match` | REGRESSED |" in out
+    assert "> eval 'cases' has been used" in out  # ledger note rides along
+    assert "\x1b[" not in out  # no ANSI styling in markdown mode
+
+
 # ---------------------------------------------------------------------------
 # Reference resolution
 # ---------------------------------------------------------------------------

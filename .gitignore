@@ -15,6 +15,9 @@ htmlcov/
 
 # holdout run store (local artifacts, never committed)
 .holdout/
+# the dogfood baseline commits only its JSON artifact, never the index
+examples/ci/store/index.sqlite3
+examples/ci/store/ledger.sqlite3
 
 # Node (dashboard dev)
 node_modules/

@@ -1,0 +1,538 @@
+{
+  "created_at": "2026-06-11T03:21:27.250792+00:00",
+  "eval_fingerprint": "1f445732d97161e6fbbc77e13e2f03ec1682390618d7426fabc732f806cdab26",
+  "eval_name": "cases",
+  "holdout_version": "0.0.1",
+  "results": [
+    {
+      "case_id": "sum000",
+      "error": null,
+      "latency_s": 2.2079984773881733e-06,
+      "output": "0",
+      "scores": {
+        "exact_match": {
+          "detail": null,
+          "kind": "binary",
+          "value": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "sum001",
+      "error": null,
+      "latency_s": 7.079943316057324e-07,
+      "output": "2",
+      "scores": {
+        "exact_match": {
+          "detail": null,
+          "kind": "binary",
+          "value": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "sum002",
+      "error": null,
+      "latency_s": 5.420006345957518e-07,
+      "output": "4",
+      "scores": {
+        "exact_match": {
+          "detail": null,
+          "kind": "binary",
+          "value": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "sum003",
+      "error": null,
+      "latency_s": 5.830006557516754e-07,
+      "output": "6",
+      "scores": {
+        "exact_match": {
+          "detail": null,
+          "kind": "binary",
+          "value": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "sum004",
+      "error": null,
+      "latency_s": 7.499984349124134e-07,
+      "output": "8",
+      "scores": {
+        "exact_match": {
+          "detail": null,
+          "kind": "binary",
+          "value": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "sum005",
+      "error": null,
+      "latency_s": 6.250047590583563e-07,
+      "output": "10",
+      "scores": {
+        "exact_match": {
+          "detail": null,
+          "kind": "binary",
+          "value": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "sum006",
+      "error": null,
+      "latency_s": 5.00003807246685e-07,
+      "output": "12",
+      "scores": {
+        "exact_match": {
+          "detail": null,
+          "kind": "binary",
+          "value": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "sum007",
+      "error": null,
+      "latency_s": 1.3749959180131555e-06,
+      "output": "14",
+      "scores": {
+        "exact_match": {
+          "detail": null,
+          "kind": "binary",
+          "value": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "sum008",
+      "error": null,
+      "latency_s": 6.660047802142799e-07,
+      "output": "16",
+      "scores": {
+        "exact_match": {
+          "detail": null,
+          "kind": "binary",
+          "value": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "sum009",
+      "error": null,
+      "latency_s": 6.67001586407423e-07,
+      "output": "18",
+      "scores": {
+        "exact_match": {
+          "detail": null,
+          "kind": "binary",
+          "value": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "sum010",
+      "error": null,
+      "latency_s": 5.420006345957518e-07,
+      "output": "20",
+      "scores": {
+        "exact_match": {
+          "detail": null,
+          "kind": "binary",
+          "value": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "sum011",
+      "error": null,
+      "latency_s": 5.829933797940612e-07,
+      "output": "22",
+      "scores": {
+        "exact_match": {
+          "detail": null,
+          "kind": "binary",
+          "value": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "sum012",
+      "error": null,
+      "latency_s": 4.999965312890708e-07,
+      "output": "24",
+      "scores": {
+        "exact_match": {
+          "detail": null,
+          "kind": "binary",
+          "value": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "sum013",
+      "error": null,
+      "latency_s": 4.169996827840805e-07,
+      "output": "26",
+      "scores": {
+        "exact_match": {
+          "detail": null,
+          "kind": "binary",
+          "value": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "sum014",
+      "error": null,
+      "latency_s": 4.579997039400041e-07,
+      "output": "28",
+      "scores": {
+        "exact_match": {
+          "detail": null,
+          "kind": "binary",
+          "value": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "sum015",
+      "error": null,
+      "latency_s": 5.00003807246685e-07,
+      "output": "30",
+      "scores": {
+        "exact_match": {
+          "detail": null,
+          "kind": "binary",
+          "value": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "sum016",
+      "error": null,
+      "latency_s": 4.579997039400041e-07,
+      "output": "32",
+      "scores": {
+        "exact_match": {
+          "detail": null,
+          "kind": "binary",
+          "value": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "sum017",
+      "error": null,
+      "latency_s": 4.590037860907614e-07,
+      "output": "34",
+      "scores": {
+        "exact_match": {
+          "detail": null,
+          "kind": "binary",
+          "value": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "sum018",
+      "error": null,
+      "latency_s": 4.999965312890708e-07,
+      "output": "36",
+      "scores": {
+        "exact_match": {
+          "detail": null,
+          "kind": "binary",
+          "value": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "sum019",
+      "error": null,
+      "latency_s": 4.5899651013314724e-07,
+      "output": "38",
+      "scores": {
+        "exact_match": {
+          "detail": null,
+          "kind": "binary",
+          "value": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "sum020",
+      "error": null,
+      "latency_s": 5.409965524449944e-07,
+      "output": "40",
+      "scores": {
+        "exact_match": {
+          "detail": null,
+          "kind": "binary",
+          "value": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "sum021",
+      "error": null,
+      "latency_s": 4.5899651013314724e-07,
+      "output": "42",
+      "scores": {
+        "exact_match": {
+          "detail": null,
+          "kind": "binary",
+          "value": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "sum022",
+      "error": null,
+      "latency_s": 4.169996827840805e-07,
+      "output": "44",
+      "scores": {
+        "exact_match": {
+          "detail": null,
+          "kind": "binary",
+          "value": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "sum023",
+      "error": null,
+      "latency_s": 4.169996827840805e-07,
+      "output": "46",
+      "scores": {
+        "exact_match": {
+          "detail": null,
+          "kind": "binary",
+          "value": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "sum024",
+      "error": null,
+      "latency_s": 4.169996827840805e-07,
+      "output": "48",
+      "scores": {
+        "exact_match": {
+          "detail": null,
+          "kind": "binary",
+          "value": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "sum025",
+      "error": null,
+      "latency_s": 4.169996827840805e-07,
+      "output": "50",
+      "scores": {
+        "exact_match": {
+          "detail": null,
+          "kind": "binary",
+          "value": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "sum026",
+      "error": null,
+      "latency_s": 4.169996827840805e-07,
+      "output": "52",
+      "scores": {
+        "exact_match": {
+          "detail": null,
+          "kind": "binary",
+          "value": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "sum027",
+      "error": null,
+      "latency_s": 4.579997039400041e-07,
+      "output": "54",
+      "scores": {
+        "exact_match": {
+          "detail": null,
+          "kind": "binary",
+          "value": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "sum028",
+      "error": null,
+      "latency_s": 4.169996827840805e-07,
+      "output": "56",
+      "scores": {
+        "exact_match": {
+          "detail": null,
+          "kind": "binary",
+          "value": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "sum029",
+      "error": null,
+      "latency_s": 4.999965312890708e-07,
+      "output": "58",
+      "scores": {
+        "exact_match": {
+          "detail": null,
+          "kind": "binary",
+          "value": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "sum030",
+      "error": null,
+      "latency_s": 4.999965312890708e-07,
+      "output": "60",
+      "scores": {
+        "exact_match": {
+          "detail": null,
+          "kind": "binary",
+          "value": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "sum031",
+      "error": null,
+      "latency_s": 4.580069798976183e-07,
+      "output": "62",
+      "scores": {
+        "exact_match": {
+          "detail": null,
+          "kind": "binary",
+          "value": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "sum032",
+      "error": null,
+      "latency_s": 4.590037860907614e-07,
+      "output": "64",
+      "scores": {
+        "exact_match": {
+          "detail": null,
+          "kind": "binary",
+          "value": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "sum033",
+      "error": null,
+      "latency_s": 5.00003807246685e-07,
+      "output": "66",
+      "scores": {
+        "exact_match": {
+          "detail": null,
+          "kind": "binary",
+          "value": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "sum034",
+      "error": null,
+      "latency_s": 4.5899651013314724e-07,
+      "output": "68",
+      "scores": {
+        "exact_match": {
+          "detail": null,
+          "kind": "binary",
+          "value": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "sum035",
+      "error": null,
+      "latency_s": 4.169996827840805e-07,
+      "output": "70",
+      "scores": {
+        "exact_match": {
+          "detail": null,
+          "kind": "binary",
+          "value": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "sum036",
+      "error": null,
+      "latency_s": 4.590037860907614e-07,
+      "output": "72",
+      "scores": {
+        "exact_match": {
+          "detail": null,
+          "kind": "binary",
+          "value": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "sum037",
+      "error": null,
+      "latency_s": 5.00003807246685e-07,
+      "output": "74",
+      "scores": {
+        "exact_match": {
+          "detail": null,
+          "kind": "binary",
+          "value": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "sum038",
+      "error": null,
+      "latency_s": 4.169996827840805e-07,
+      "output": "76",
+      "scores": {
+        "exact_match": {
+          "detail": null,
+          "kind": "binary",
+          "value": 1.0
+        }
+      }
+    },
+    {
+      "case_id": "sum039",
+      "error": null,
+      "latency_s": 5.409965524449944e-07,
+      "output": "78",
+      "scores": {
+        "exact_match": {
+          "detail": null,
+          "kind": "binary",
+          "value": 1.0
+        }
+      }
+    }
+  ],
+  "run_id": "dace0098e76786c05d5b63757073e92b3d3e3950a8159b8ac1f6cbce351c0b9b",
+  "scorer_fingerprints": [
+    "e0b21f14155e5e18c0c315dff7172a496277f2da22f4f750e940c37cc2216a94"
+  ],
+  "scorer_names": [
+    "exact_match"
+  ],
+  "seed": 42,
+  "target_fingerprint": "65b982b86dcb02cb3b30522b9eb12a1969bec18526bd5df11039708012546dbe",
+  "target_name": "examples-ci-candidate"
+}

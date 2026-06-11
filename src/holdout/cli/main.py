@@ -47,6 +47,9 @@ def _build_parser() -> argparse.ArgumentParser:
     p_run.add_argument("--base-url", default=None, help="override the provider endpoint")
     p_run.add_argument("--seed", type=int, default=0)
     p_run.add_argument("--max-concurrency", type=int, default=8)
+    p_run.add_argument(
+        "--id-file", default=None, help="write the full run id to this file (for CI scripting)"
+    )
 
     p_cmp = sub.add_parser("compare", help="compare two stored runs and issue a verdict")
     p_cmp.add_argument("baseline", help="run id or unambiguous prefix")
@@ -66,6 +69,11 @@ def _build_parser() -> argparse.ArgumentParser:
     p_cmp.add_argument("--budget", type=int, default=20, help="holdout-discipline use budget")
     p_cmp.add_argument(
         "--no-ledger", action="store_true", help="do not record this look in the ledger"
+    )
+    p_cmp.add_argument(
+        "--markdown",
+        action="store_true",
+        help="emit GitHub-flavored markdown instead of a terminal table (for PR comments)",
     )
 
     p_list = sub.add_parser("list", help="list stored runs")
@@ -119,11 +127,13 @@ def _cmd_run(args: argparse.Namespace, console: Console) -> int:
     path = RunStore(args.store).save(result)
     print_run(console, result)
     console.print(f"saved [bold]{result.short_run_id}[/bold] -> {path}")
+    if args.id_file is not None:
+        Path(args.id_file).write_text(result.run_id, encoding="utf-8")
     return 0
 
 
 def _cmd_compare(args: argparse.Namespace, console: Console) -> int:
-    from holdout.cli.render import print_comparison
+    from holdout.cli.render import comparison_markdown, print_comparison
     from holdout.leakage.ledger import HoldoutLedger
     from holdout.regression.compare import compare
     from holdout.store.run_store import RunStore
@@ -139,7 +149,10 @@ def _cmd_compare(args: argparse.Namespace, console: Console) -> int:
         test=args.test,
         seed=args.seed,
     )
-    print_comparison(console, cmp)
+    if args.markdown:
+        print(comparison_markdown(cmp))
+    else:
+        print_comparison(console, cmp)
 
     if not args.no_ledger:
         ledger = HoldoutLedger(args.store)
@@ -150,8 +163,11 @@ def _cmd_compare(args: argparse.Namespace, console: Console) -> int:
             context=f"{baseline.short_run_id} vs {candidate.short_run_id}",
         )
         report = ledger.check(baseline.eval_fingerprint, baseline.eval_name, budget=args.budget)
-        style = {"ok": "dim", "caution": "yellow", "overfit-risk": "bold red"}[report.level]
-        console.print(f"[{style}]{report}[/]")
+        if args.markdown:
+            print(f"\n> {report}")
+        else:
+            style = {"ok": "dim", "caution": "yellow", "overfit-risk": "bold red"}[report.level]
+            console.print(f"[{style}]{report}[/]")
 
     if cmp.verdict == "regressed":
         return 1

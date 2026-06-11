@@ -78,7 +78,7 @@ class RunStore:
         if not path.exists():
             tmp = path.with_suffix(".json.tmp")
             tmp.write_text(
-                json.dumps(run.to_dict(), sort_keys=True, indent=2, ensure_ascii=False),
+                json.dumps(run.to_dict(), sort_keys=True, indent=2, ensure_ascii=False) + "\n",
                 encoding="utf-8",
             )
             tmp.replace(path)  # atomic on POSIX: a reader never sees a partial file
